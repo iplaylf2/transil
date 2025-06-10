@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lib.Harmony" Version="2.*" PrivateAssets="all" />
+    <PackageReference Include="HarmonyX" Version="2.*" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
