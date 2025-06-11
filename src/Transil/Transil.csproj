@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>LF2.Transil</AssemblyName>
     <PackageId>LF2.Transil</PackageId>
     <Version>0.0.0-dev</Version>
     <Authors>i-play-lf2</Authors>
