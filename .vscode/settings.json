@@ -2,6 +2,7 @@
     "dotnet.defaultSolution": "Transil.sln",
     "cSpell.words": [
         "Ldarg",
+        "Ldfld",
         "Transil"
     ]
 }

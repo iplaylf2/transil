@@ -4,9 +4,10 @@ using HarmonyLib;
 
 namespace Transil.Attributes;
 
-public sealed class InjectThisValueAttribute : StackValueAttribute {
+public sealed class InjectThisValueAttribute : StackValueAttribute
+{
     public override IEnumerable<CodeInstruction> Generate(TypeInfo instance)
     {
-        yield return new CodeInstruction(OpCodes.Ldarg_0);       
+        yield return new CodeInstruction(OpCodes.Ldarg_0);
     }
- }
+}
