@@ -1,0 +1,28 @@
+﻿using System.Reflection;
+using HarmonyLib;
+using Transil.Attributes;
+
+namespace Transil.Demo;
+
+class Program
+{
+  [ILHijackHandler(HijackStrategy.InsertAdditional)]
+  public static int Foo(
+    [ConsumeStackValue] int foo,
+    [InjectArgumentValue(0)] Bar instance,
+    [InjectMemberValue(MemberInjectionType.Field, "xxx")] bool xxx
+  )
+  {
+    return foo;
+  }
+
+  public static void Demo(CodeMatcher matcher)
+  {
+    Transil.ApplyHijack(matcher, Foo, typeof(Bar).GetTypeInfo());
+  }
+}
+
+class Bar
+{
+  private readonly bool xxx;
+}
