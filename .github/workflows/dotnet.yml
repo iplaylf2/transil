@@ -2,7 +2,7 @@ name: NuGet Package Publisher
 
 on:
   push:
-    tags: ['*']
+    tags: ['v*']
 
 jobs:
   publish:
@@ -12,36 +12,41 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          8.0.x
-          9.0.x
+        dotnet-version: 9.0.x
 
     - name: Restore dependencies
       run: dotnet restore src/Transil/Transil.csproj
 
-    - name: Build Transil
+    - name: Build project
       run: dotnet build src/Transil/Transil.csproj -c Release --no-restore
 
-    - name: Pack Transil
+    - name: Create NuGet package
+      id: pack
       run: |
-        TAG_NAME=${{ github.ref_name }}
-        dotnet pack src/Transil/Transil.csproj -c Release -p:PackageVersion=$TAG_NAME --output nupkg
+        VERSION=${GITHUB_REF#refs/tags/v}
+
+        dotnet pack src/Transil/Transil.csproj \
+          -c Release \
+          --no-build \
+          -p:PackageVersion=$VERSION \
+          -p:ContinuousIntegrationBuild=true \
+          --output nupkg
+
+        echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_OUTPUT
 
         echo "Generated packages:"
         ls -lh nupkg/
-      id: pack
 
     - name: Publish to GitHub Packages
       run: |
-        OWNER=${{ github.repository_owner }}
-
-        dotnet nuget push "nupkg/Transil.*.nupkg" \
-          --source "https://nuget.pkg.github.com/$OWNER/index.json" \
+        dotnet nuget push "nupkg/LF2.Transil.${{ steps.pack.outputs.PACKAGE_VERSION }}.nupkg" \
+          --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
           --api-key $GITHUB_TOKEN
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

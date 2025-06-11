@@ -3,15 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Transil</PackageId>
-    <Version>0.0.1</Version>
+    <PackageId>LF2.Transil</PackageId>
+    <Version>0.0.0-dev</Version>
     <Authors>i-play-lf2</Authors>
+    <Company>YourCompany</Company>
+    <PackageDescription>Declarative IL hijacking for HarmonyX - Automatically generate and replace IL instructions using annotated handler methods. Integrates with CodeMatcher for targeted transpiler modifications.</PackageDescription>
+    <PackageProjectUrl>https://github.com/iplaylf2/transil</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/iplaylf2/transil.git</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
