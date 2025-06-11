@@ -3,11 +3,11 @@ using HarmonyLib;
 using Transil.Attributes;
 using Transil.Extensions;
 
-namespace Transil.IL;
+namespace Transil.Operations;
 
-public static class Transil
+public static class ILManipulator
 {
-    public static void ApplyHijack<T>(
+    public static void ApplyTransformation<T>(
         CodeMatcher matcher,
         T handler,
         TypeInfo? instanceType = null) where T : Delegate

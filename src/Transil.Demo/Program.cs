@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using Transil.Attributes;
+using Transil.Operations;
 
 namespace Transil.Demo;
 
@@ -18,7 +19,7 @@ class Program
 
   public static void Demo(CodeMatcher matcher)
   {
-    Transil.ApplyHijack(matcher, Foo, typeof(Bar).GetTypeInfo());
+    ILManipulator.ApplyTransformation(matcher, Foo, typeof(Bar).GetTypeInfo());
   }
 }
 
