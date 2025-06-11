@@ -27,10 +27,21 @@ jobs:
     - name: Build Transil
       run: dotnet build src/Transil/Transil.csproj -c Release --no-restore
 
-    - name: Pack and Publish Transil
+    - name: Pack Transil
       run: |
         TAG_NAME=${{ github.ref_name }}
         dotnet pack src/Transil/Transil.csproj -c Release -p:PackageVersion=$TAG_NAME --output nupkg
-        dotnet nuget push "nupkg/Transil.*.nupkg" --source github
+
+        echo "Generated packages:"
+        ls -lh nupkg/
+      id: pack
+
+    - name: Publish to GitHub Packages
+      run: |
+        OWNER=${{ github.repository_owner }}
+
+        dotnet nuget push "nupkg/Transil.*.nupkg" \
+          --source "https://nuget.pkg.github.com/$OWNER/index.json" \
+          --api-key $GITHUB_TOKEN
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
