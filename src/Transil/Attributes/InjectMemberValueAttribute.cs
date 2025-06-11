@@ -8,6 +8,7 @@ public sealed class InjectMemberValueAttribute(
     MemberInjectionType memberType,
     string memberName) : StackValueAttribute
 {
+    public override bool RequiresInjection { get; } = true;
     public MemberInjectionType MemberType { get; } = memberType;
     public string MemberName { get; } = memberName;
 

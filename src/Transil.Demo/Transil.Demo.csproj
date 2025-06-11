@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HarmonyX" Version="2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Transil/Transil.csproj" />
   </ItemGroup>
 

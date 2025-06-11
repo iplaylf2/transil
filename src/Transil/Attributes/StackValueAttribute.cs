@@ -20,6 +20,8 @@ public abstract class StackValueAttribute : Attribute
         };
     }
 
+    public abstract bool RequiresInjection { get; }
+
     public virtual IEnumerable<CodeInstruction> GenerateInstructions(TypeInfo? instanceType)
     {
         yield break;

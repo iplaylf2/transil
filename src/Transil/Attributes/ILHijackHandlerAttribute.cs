@@ -7,12 +7,12 @@ namespace Transil.Attributes;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 public sealed class ILHijackHandlerAttribute(HijackStrategy strategy) : Attribute
 {
-    public HijackStrategy Strategy { get; } = strategy;
-
     internal static ILHijackHandlerAttribute? GetHandlerAttribute(MethodInfo methodInfo)
     {
         return methodInfo.GetCustomAttribute<ILHijackHandlerAttribute>();
     }
+
+    public HijackStrategy Strategy { get; } = strategy;
 
     public void ApplyHijack(CodeMatcher matcher, MethodInfo handler)
     {

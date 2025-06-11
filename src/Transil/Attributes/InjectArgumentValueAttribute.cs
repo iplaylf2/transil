@@ -6,6 +6,8 @@ namespace Transil.Attributes;
 
 public sealed class InjectArgumentValueAttribute(int index) : StackValueAttribute
 {
+    public override bool RequiresInjection { get; } = true;
+
     public int Index { get; } = index switch
     {
         < 0
