@@ -28,7 +28,7 @@ jobs:
       run: dotnet build src/Transil/Transil.csproj -c Release --no-restore
 
     - name: Pack and Publish Transil
-      run:
+      run: |
         TAG_NAME=${{ github.ref_name }}
         dotnet pack src/Transil/Transil.csproj -c Release -p:PackageVersion=$TAG_NAME --output nupkg
         dotnet nuget push "nupkg/Transil.*.nupkg" --source github
