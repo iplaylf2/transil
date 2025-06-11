@@ -11,12 +11,20 @@ public sealed class InjectMemberValueAttribute(
     public MemberInjectionType MemberType { get; } = memberType;
     public string MemberName { get; } = memberName;
 
-    public override IEnumerable<CodeInstruction> Generate(TypeInfo instance)
+    public override IEnumerable<CodeInstruction> GenerateInstructions(TypeInfo? instanceType)
     {
+        if (instanceType is null)
+        {
+            throw new ArgumentNullException(
+                nameof(instanceType),
+                "Instance type cannot be null when injecting member values"
+            );
+        }
+
         return MemberType switch
         {
             MemberInjectionType.Field
-                => GenerateFieldLoad(instance, MemberName),
+                => GenerateFieldLoad(instanceType, MemberName),
 
             _ => throw new NotSupportedException(
                 $"Unsupported member type: {MemberType}. " +

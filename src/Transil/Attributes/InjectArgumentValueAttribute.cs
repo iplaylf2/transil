@@ -15,7 +15,7 @@ public sealed class InjectArgumentValueAttribute(int index) : StackValueAttribut
         var x => x
     };
 
-    public override IEnumerable<CodeInstruction> Generate(TypeInfo instance)
+    public override IEnumerable<CodeInstruction> GenerateInstructions(TypeInfo? instanceType)
     {
         yield return Index switch
         {

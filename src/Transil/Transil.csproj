@@ -18,8 +18,4 @@
     <PackageReference Include="HarmonyX" Version="2.*" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../Transil.Kit/Transil.Kit.csproj" />
-  </ItemGroup>
-
 </Project>

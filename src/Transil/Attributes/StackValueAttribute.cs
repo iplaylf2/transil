@@ -20,7 +20,7 @@ public abstract class StackValueAttribute : Attribute
         };
     }
 
-    public virtual IEnumerable<CodeInstruction> Generate(TypeInfo instance)
+    public virtual IEnumerable<CodeInstruction> GenerateInstructions(TypeInfo? instanceType)
     {
         yield break;
     }
