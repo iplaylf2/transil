@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+using System.Reflection;
 using HarmonyLib;
 using Transil.Attributes;
+using Transil.Extensions;
 
-namespace Transil;
+namespace Transil.IL;
 
 public static class Transil
 {
@@ -49,20 +50,5 @@ public static class Transil
         matcher.InsertAndAdvance(loadInstructions);
 
         handlerAttribute.ApplyHijack(matcher, methodInfo);
-    }
-
-    public static IEnumerable<TAccumulate> Scan<TSource, TAccumulate>(
-        this IEnumerable<TSource> source,
-        TAccumulate seed,
-        Func<TAccumulate, TSource, TAccumulate> accumulator)
-    {
-        TAccumulate state = seed;
-        yield return state;
-
-        foreach (var item in source)
-        {
-            state = accumulator(state, item);
-            yield return state;
-        }
     }
 }
