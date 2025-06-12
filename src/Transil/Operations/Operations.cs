@@ -16,7 +16,7 @@ public static class ILManipulator
         var l2Cache = L1Cache.GetOrCreateValue(handler);
 
         {
-            if (l2Cache.TryGetValue(instanceType ?? DefaultTypeInfo, out var applyAction))
+            if (l2Cache.TryGetValue(instanceType ?? NullTypeInfo, out var applyAction))
             {
                 applyAction(matcher);
 
@@ -31,8 +31,9 @@ public static class ILManipulator
             var methodDesc = $"{methodInfo.DeclaringType?.FullName ?? "unknown"}.{methodInfo.Name}";
 
             throw new InvalidOperationException(
-                $"Handler method '{methodDesc}' must be decorated with [{nameof(ILHijackHandlerAttribute)}] " +
-                "to specify hijack behavior");
+                $"Handler method '{methodDesc}' must be decorated with [{nameof(ILHijackHandlerAttribute)}] "
+                + "to specify hijack behavior"
+            );
         }
 
         var loadInstructions = methodInfo
@@ -69,9 +70,9 @@ public static class ILManipulator
                 handlerAttribute.ApplyHijack(matcher, methodInfo);
             }
 
-            applyAction(matcher);
+            l2Cache.Add(instanceType ?? NullTypeInfo, applyAction);
 
-            l2Cache.Add(instanceType ?? DefaultTypeInfo, applyAction);
+            applyAction(matcher);
         }
     }
 
@@ -82,5 +83,7 @@ public static class ILManipulator
         [];
 #endif
 
-    private static readonly TypeInfo DefaultTypeInfo = typeof(object).GetTypeInfo();
+    private static readonly TypeInfo NullTypeInfo = typeof(AsNull).GetTypeInfo();
+
+    private sealed class AsNull { }
 }
