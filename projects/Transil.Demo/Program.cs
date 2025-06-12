@@ -21,6 +21,10 @@ class Program
   {
     ILManipulator.ApplyTransformation(matcher, Foo, typeof(Bar).GetTypeInfo());
   }
+
+  public static void Main()
+  {
+  }
 }
 
 class Bar

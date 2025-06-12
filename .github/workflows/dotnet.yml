@@ -21,17 +21,17 @@ jobs:
         dotnet-version: 9.0.x
 
     - name: Restore dependencies
-      run: dotnet restore src/Transil/Transil.csproj
+      run: dotnet restore projects/Transil/Transil.csproj
 
     - name: Build project
-      run: dotnet build src/Transil/Transil.csproj -c Release --no-restore
+      run: dotnet build projects/Transil/Transil.csproj -c Release --no-restore
 
     - name: Create NuGet package
       id: pack
       run: |
         VERSION=${GITHUB_REF#refs/tags/v}
 
-        dotnet pack src/Transil/Transil.csproj \
+        dotnet pack projects/Transil/Transil.csproj \
           -c Release \
           --no-build \
           -p:PackageVersion=$VERSION \
