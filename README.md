@@ -26,7 +26,7 @@ public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstructio
 {
     var matcher = new CodeMatcher(instructions);
     // ... target specific instructions ...
-    Transil.ApplyHijack(matcher, ProcessValue, typeof(TargetClass));
+    ILManipulator.ApplyTransformation(matcher, ProcessValue, typeof(TargetClass));
     return matcher.InstructionEnumeration();
 }
 ```

@@ -13,7 +13,7 @@ public sealed class InjectArgumentValueAttribute(int index) : StackValueAttribut
         < 0
         => throw new ArgumentOutOfRangeException(nameof(index), "Argument index cannot be negative"),
         > short.MaxValue
-        => throw new ArgumentOutOfRangeException(nameof(index), $"Argument index cannot exceed {short.Max}"),
+        => throw new ArgumentOutOfRangeException(nameof(index), $"Argument index cannot exceed {short.MaxValue}"),
         var x => x
     };
 

@@ -1,12 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>LF2.Transil</AssemblyName>
     <PackageId>LF2.Transil</PackageId>
     <Version>0.0.0-dev</Version>
     <Authors>i-play-lf2</Authors>
-    <PackageDescription>Declarative IL hijacking for HarmonyX - Automatically generate and replace IL instructions using annotated handler methods. Integrates with CodeMatcher for targeted transpiler modifications.</PackageDescription>
+    <PackageDescription>Declarative IL hijacking for HarmonyX - Automatically generate and replace
+      IL instructions using annotated handler methods. Integrates with CodeMatcher for targeted
+      transpiler modifications.</PackageDescription>
     <PackageProjectUrl>https://github.com/iplaylf2/transil</PackageProjectUrl>
     <RepositoryUrl>https://github.com/iplaylf2/transil.git</RepositoryUrl>
   </PropertyGroup>
