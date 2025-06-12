@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{17245595-230B-9055-A944-863F0DDDA8E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transil", "src\Transil\Transil.csproj", "{0E03AD86-F615-4DCD-862B-7606638D5DE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transil", "projects\Transil\Transil.csproj", "{0E03AD86-F615-4DCD-862B-7606638D5DE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transil.Demo", "src\Transil.Demo\Transil.Demo.csproj", "{AA0F25D1-60F3-4F70-9D0D-1B355AE18EED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transil.Demo", "projects\Transil.Demo\Transil.Demo.csproj", "{AA0F25D1-60F3-4F70-9D0D-1B355AE18EED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,7 +48,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0E03AD86-F615-4DCD-862B-7606638D5DE3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
-		{AA0F25D1-60F3-4F70-9D0D-1B355AE18EED} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{0E03AD86-F615-4DCD-862B-7606638D5DE3} = {17245595-230B-9055-A944-863F0DDDA8E8}
+		{AA0F25D1-60F3-4F70-9D0D-1B355AE18EED} = {17245595-230B-9055-A944-863F0DDDA8E8}
 	EndGlobalSection
 EndGlobal
