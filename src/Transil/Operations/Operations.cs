@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Transil.Attributes;
 using Transil.Extensions;
@@ -12,13 +13,26 @@ public static class ILManipulator
         T handler,
         TypeInfo? instanceType = null) where T : Delegate
     {
+        var l2Cache = L1Cache.GetOrCreateValue(handler);
+
+        {
+            if (l2Cache.TryGetValue(instanceType ?? DefaultTypeInfo, out var applyAction))
+            {
+                applyAction(matcher);
+
+                return;
+            }
+        }
+
         var methodInfo = handler.GetMethodInfo();
 
         if (ILHijackHandlerAttribute.GetHandlerAttribute(methodInfo) is not { } handlerAttribute)
         {
-            matcher.InsertAndAdvance(Transpilers.EmitDelegate(handler));
+            var methodDesc = $"{methodInfo.DeclaringType?.FullName ?? "unknown"}.{methodInfo.Name}";
 
-            return;
+            throw new InvalidOperationException(
+                $"Handler method '{methodDesc}' must be decorated with [{nameof(ILHijackHandlerAttribute)}] " +
+                "to specify hijack behavior");
         }
 
         var loadInstructions = methodInfo
@@ -47,8 +61,26 @@ public static class ILManipulator
             .SelectMany(x => x!.GenerateInstructions(instanceType))
             .ToArray();
 
-        matcher.InsertAndAdvance(loadInstructions);
+        {
+            void applyAction(CodeMatcher matcher)
+            {
+                matcher.InsertAndAdvance(loadInstructions);
 
-        handlerAttribute.ApplyHijack(matcher, methodInfo);
+                handlerAttribute.ApplyHijack(matcher, methodInfo);
+            }
+
+            applyAction(matcher);
+
+            l2Cache.Add(instanceType ?? DefaultTypeInfo, applyAction);
+        }
     }
+
+    private static readonly ConditionalWeakTable<Delegate, ConditionalWeakTable<TypeInfo, Action<CodeMatcher>>> L1Cache =
+#if NETSTANDARD2_0
+        new();
+#else
+        [];
+#endif
+
+    private static readonly TypeInfo DefaultTypeInfo = typeof(object).GetTypeInfo();
 }
