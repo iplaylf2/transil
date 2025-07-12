@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyName>LF2.Transil</AssemblyName>
     <PackageId>LF2.Transil</PackageId>
@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HarmonyX" Version="2.*" PrivateAssets="all" />
+    <PackageReference Include="HarmonyX" Version="2.10.1" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
